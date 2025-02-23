@@ -175,3 +175,65 @@ class Employee(Person):
 # age int
 
 
+#notes from https://youtu.be/6c6NYPjO_rI
+
+class Guitar:
+    #the init method is automatically being called everytime you create a new object (below: my_guitar)
+    def __init__(self):
+        #how many strings does the guitar have?
+        #create an attribute:
+        self.n_strings = 6
+        #^^this attribute can be accessed outside of the class definition
+        # by generating a guitar object
+
+        #
+        self.play()
+        #output: dum dum dum dum dum dum
+
+    #create a new method:
+    #in order to turn it into a method, you have to pass the self parameter: 
+    # **if you only say def play():, you are creating a function
+    def play(self):    
+        #want this to print some type of melody:
+        print("dum dum dum dum dum dum")
+
+#Guitar() is the object   
+# assign Guitar() to the variable my_guitar:
+my_guitar = Guitar()
+#print to see if it worked:
+print(my_guitar.n_strings) 
+#output: 6
+# 
+#Call the method play on the object itself:
+my_guitar.play()   
+#output:   dum dum dum dum dum dum
+
+#INHERITANCE#******
+#Own a guitar shop and want to keep track of the stock, 
+#Allow a new class to inherit the attributes and methods of the class Guitar from above:
+#parent class is now Guitar, and all the attributes are now available to ElectricGuitar by passing 
+#it inside the parentheses: 
+#Child class is Electric Guitar
+
+class ElectricGuitar(Guitar):
+    #if you want the child and the parent class to 100% match, type the "pass" statement:
+    #pass
+
+    #if you'd like to slightly alter the parent class, maybe to play louder:
+    def playLouder(self):
+        print("dum dum dum dum dum dum".upper())
+
+
+
+#assign my_guitar to ElectricGuitar:
+my_guitar= ElectricGuitar()
+#can we access the n_strings here?:
+# print(my_guitar.n_strings)
+#output: 6
+
+my_guitar.playLouder()
+
+
+
+
+
