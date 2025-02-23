@@ -467,7 +467,9 @@ shapes = [Circle(), Square()]
 
 for shape in shapes:
     shape.draw()
-    #TODO there was no output here. Figure out how to use this
+    #outputs:
+    # Circle drawn
+    # Square drawn
 
 #In the example, both Circle and Square classes inherit from the Shape class and provide 
 # their own implementation of the draw method. When iterating through a list of shapes, 
@@ -477,4 +479,116 @@ for shape in shapes:
 #Polymorphism enhances code reusability, flexibility, and maintainability in object-oriented 
 # programming, making it a powerful concept to leverage when designing applications in Python.
     
+
+#Encapsulation
+#Encapsulation is one of the fundamental concepts in object-oriented programming that focuses 
+# on bundling the data (attributes) and methods (functions) that operate on the data into a 
+# single unit called a class. This allows for better data security and organization, as the 
+# internal details of the class are hidden from the outside world.
+
+#In Python, encapsulation is achieved through the use of access specifiers, namely public, 
+# protected, and private attributes and methods. By convention, attributes and methods that 
+# are intended to be accessed from outside the class are marked as public, those that should 
+# only be accessed within the class or subclasses are marked as protected, and those that are 
+# meant to be hidden from external access are marked as private.
+
+class MyClass:
+    def __init__(self):
+        #can be accessed from outside the class: public
+        self.public_attribute = 10
+
+        #can be accessed from within the classes or subclasses: _protected
+        self._protected_attribute = 20
+
+        #hidden from external sources: __private
+        self.__private_attribute = 30
+
+    def public_method(self):
+        pass
+
+    def _protected_method(self):
+        pass
+
+    def __private_method(self):
+        pass
+
+# Abstraction
+# Abstraction is another important concept in object-oriented programming that involves 
+# hiding the complex implementation details of a class and only showing the necessary 
+# features and functionalities to the outside world. It allows us to work at a higher 
+# level of abstraction without worrying about the internal workings of a class.
+
+# In Python, abstraction is achieved by defining abstract base classes using the abc module. 
+# Abstract base classes are classes that cannot be instantiated directly and are meant to be 
+# subclassed by concrete classes which implement the abstract methods defined in the base class.
+
+from abc import ABC, abstractmethod
+
+class Bird(ABC):
+    @abstractmethod
+    def fly(self):
+        pass
+
+class Sparrow(Bird):
+    def fly(self):
+        print("Sparrow flying high")
+
+sparrow = Sparrow()
+sparrow.fly()  
+# Output: Sparrow flying high
+
+#By utilizing encapsulation and abstraction in Python, developers can create more 
+# maintainable, modular, and secure code by properly organizing and hiding the 
+# internal details of their classes while exposing only the necessary functionality 
+# to the outside world.
+
+######## Practical Exercises:#########
+# 
+#Understanding Classes and Objects:
+# 
+# Create a class named 'Truck' with attributes like 'make', 'model', and 'year'. Then, 
+# create an object of the class and initialize its attributes. Finally, print out the 
+# values of the object's attributes.
+
+class Truck():
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+    def description(self):
+        print(f"Trucks: {self.make} {self.model} {self.year}")   
+my_trucks = Truck("Ford", "F-150", 1980) 
+my_trucks.description()
+#output: Trucks: Ford F-150 1980
+
+# Creating a Student Class
+
+# Define a class named 'Student' with attributes like 'name', 'age', and 'grade'. 
+# Include methods to update the student's grade and display student information. 
+# Create instances of the 'Student' class and demonstrate the functionalities.
+
+class Student():
+    def __init__(self, name, age, grade):
+        self.name = name
+        self.age = age
+        self.grade = grade
+    def updateGrade(self):
+        return f"The grade for {self.name} who is {self.age} is {self.grade}"
+
+student1 = Student("Sherry", 18, "Senior")
+student2 = Student("Joe", 15,"Freshman" )    
+
+print(student1.name)
+# output: Sherry
+
+print(f"{student2.name} is {student2.age} years old and is a {student2.grade}")
+#output: Joe is 15 years old and is a Freshman       
+
+
+
+#######Implementing Inheritance with Shapes
+
+#Create a base class named 'Shape' with methods to calculate area and perimeter. 
+# Then, create derived classes like 'Circle' and 'Rectangle' that inherit from the 
+# 'Shape' class. Implement polymorphism by calling the area method for both shapes.
 
