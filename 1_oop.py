@@ -592,3 +592,20 @@ print(f"{student2.name} is {student2.age} years old and is a {student2.grade}")
 # Then, create derived classes like 'Circle' and 'Rectangle' that inherit from the 
 # 'Shape' class. Implement polymorphism by calling the area method for both shapes.
 
+class Shape():
+    def __init__(self, length=0, width=0, radius=1):
+        self.length = length
+        self.width = width
+        self.radius = radius
+
+class Area(Shape):
+    #TODO got stuck
+
+class Circle(Shape):
+        
+########## Bank Account Management
+
+# Design a 'BankAccount' class with private attributes like 'account_number' and 
+# 'balance'. Encapsulate the attributes and create methods to deposit and withdraw 
+# funds. Demonstrate abstraction by performing transactions on a bank account.
+        
