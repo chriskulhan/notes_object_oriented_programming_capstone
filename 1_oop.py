@@ -327,3 +327,85 @@ print("my base guitar has", BaseGuitar(4).n_strings, "strings")
 
 print("my electric guitar has", my_guitar.n_strings, "strings" )
 #output: my electric guitar has 8 strings
+
+#Brocode video: https://youtu.be/an59YHkdK9A
+
+#Inheritance
+
+#class for all animals parent!:
+class Animal:
+    #class variable (all animals have to be alive)
+    alive = True
+
+    #methods:
+    def eat(self):
+        #what happens when we call this method:
+        print("This animal is eating")
+
+    def sleep(self):
+        print("This animal is sleeping")
+
+#create classes for different types of animals:
+#Rabbit is the child class, Animal is the parent class
+#child class (Rabbit), inherits everything the Animal class has
+class Rabbit(Animal):
+    #pass allows complete inheritance from the parent class of Animal:
+    # pass
+    #add unique methods to the Rabbit class:
+    def run(self):
+        print("This rabbit is running")
+
+class Fish(Animal):
+    # pass
+    #add unique method to the Fish class:
+    def swim(self):
+        print("This fish is swimming")
+    
+
+class Hawk(Animal):
+    # pass
+    #add unique methods to hawk class:
+    def fly(self):
+        print("This hawk is flying")
+
+#create objects from the classes: 
+rabbit = Rabbit()
+fish = Fish()
+hawk = Hawk()
+
+#check to see if there is an alive variable in each of the objects:
+print(rabbit.alive)
+#output: True
+
+print(fish.alive)
+#output: True
+
+print(hawk.alive)
+#output: True
+
+#check if there are eat functions in each objects: #this is wrong:
+# print(rabbit.eat) no output, bound method
+# print(fish.eat) wrong
+# print(hawk.eat) wrong
+
+#check if there are sleep functions in each object: #this is wrong!
+# print(rabbit.sleep) wrong
+# print(fish.sleep) wrong
+# print(hawk.sleep) wrong
+
+#check if the fish has an eat method:
+fish.eat()
+#output: This animal is eating
+
+hawk.sleep()
+#output: This animal is sleeping
+
+rabbit.run()
+# output: This rabbit is running
+fish.swim()
+#output: This fish is swimming
+hawk.fly()
+#output: This hawk is flying
+
+ 
+
