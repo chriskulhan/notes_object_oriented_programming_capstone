@@ -345,6 +345,10 @@ class Animal:
     def sleep(self):
         print("This animal is sleeping")
 
+    #testing out method overloading:
+    def speak(self):
+        print("Animal speaks")
+
 #create classes for different types of animals:
 #Rabbit is the child class, Animal is the parent class
 #child class (Rabbit), inherits everything the Animal class has
@@ -367,6 +371,9 @@ class Hawk(Animal):
     #add unique methods to hawk class:
     def fly(self):
         print("This hawk is flying")
+    #testing method overloading (added speak method to Animal SuperClass)
+    def speak(self):
+        print("Hawks screech") 
 
 #create objects from the classes: 
 rabbit = Rabbit()
@@ -408,4 +415,66 @@ hawk.fly()
 #output: This hawk is flying
 
  
+
+# Method overriding
+# re-write a method from the superclass in the underclass:
+#added speak to the Superclass animal
+#added an overwrite of speak in the hawk underclass
+
+#this gets its attribute from the superclass Animal:
+fish.speak()
+#output: Animal speaks
+
+#this gets its attribute from the underclass Hawk, it has overwritten the Superclass:
+hawk.speak()
+# output: Hawks screech
+
+
+#Method overloading:
+#Python does not natively support method overloading as in some other programming languages. 
+# However, we can achieve a form of method overloading using default arguments or variable arguments.
+class Calculator:
+    def add(self, a, b=None):
+        if b is not None:
+            return a + b
+        else:
+            return a
+
+calc = Calculator()
+
+print(calc.add(2, 3))  
+# Output: 5
+print(calc.add(2))     
+# Output: 2
+
+#Polymorphism with Inheritance:
+#A common use case of polymorphism is with inheritance, where different subclasses 
+# implement the same method from a superclass in their own way. This allows for 
+# flexible and reusable code.
+class Shape:
+    def draw(self):
+        pass
+
+class Circle(Shape):
+    def draw(self):
+        print("Circle drawn")
+
+class Square(Shape):
+    def draw(self):
+        print("Square drawn")
+
+shapes = [Circle(), Square()]
+
+for shape in shapes:
+    shape.draw()
+    #TODO there was no output here. Figure out how to use this
+
+#In the example, both Circle and Square classes inherit from the Shape class and provide 
+# their own implementation of the draw method. When iterating through a list of shapes, 
+# polymorphism allows each shape object to be treated uniformly, regardless of its 
+# specific subclass.
+
+#Polymorphism enhances code reusability, flexibility, and maintainability in object-oriented 
+# programming, making it a powerful concept to leverage when designing applications in Python.
+    
 
