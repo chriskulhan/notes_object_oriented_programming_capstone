@@ -177,18 +177,24 @@ class Employee(Person):
 
 #notes from https://youtu.be/6c6NYPjO_rI
 
+#parent class is Guitar:
 class Guitar:
     #the init method is automatically being called everytime you create a new object (below: my_guitar)
-    def __init__(self):
+    # def __init__(self): (changed this to add n_strings=6 parameter, so the default n_strings will be 6)
+    def __init__(self, n_strings=6):
         #how many strings does the guitar have?
         #create an attribute:
-        self.n_strings = 6
+        # self.n_strings = 6 changed this to use the n_strings parameter added above
+        self.n_strings = n_strings
         #^^this attribute can be accessed outside of the class definition
         # by generating a guitar object
 
-        #
         self.play()
         #output: dum dum dum dum dum dum
+
+        #try to add a secret attribute in the parent class:
+        self.__cost = 50
+        #check by printing my_guitar._ElectricGuitar__cost) below
 
     #create a new method:
     #in order to turn it into a method, you have to pass the self parameter: 
@@ -213,8 +219,18 @@ my_guitar.play()
 #Allow a new class to inherit the attributes and methods of the class Guitar from above:
 #parent class is now Guitar, and all the attributes are now available to ElectricGuitar by passing 
 #it inside the parentheses: 
-#Child class is Electric Guitar
 
+#Create new class called BaseGuitar that will inherite all the attributes of the Guitar class:
+class BaseGuitar(Guitar):
+    #only want to change is the number of strings
+    #add another paramater called n_strings to the parent class called Guitar:
+    #now looks like: def __init__(self, n_strings=6): above in parent class Guitar
+    #add pass to this class to have all the attributes of the parent class
+    pass
+    #go to the very bottom to change the number of strings in the BaseGuitar:
+
+
+#Child class is Electric Guitar:
 class ElectricGuitar(Guitar):
     #if you want the child and the parent class to 100% match, type the "pass" statement:
     #pass
@@ -223,8 +239,37 @@ class ElectricGuitar(Guitar):
     def playLouder(self):
         print("dum dum dum dum dum dum".upper())
 
+    #add a secret (though not really) method to the parent class Electric Guitar:
+    def __secret(self):
+        #concatinate a private member from the parent class:
+        #special way, trying to access self.__cost = 50 in class Guitar
+        print("This guitar actually cost me $", self._Guitar__cost, "only!" )        
 
+    #if you want to change the parameter in the child class, but not the parent class:
+    #first do an init it the child class:
+    def __init__(self):
+        #because the child class inherited everything from the parent class, 
+        # you will need to access the "super" function to access the init from the parent class
+        #DO NOT pass the self parameter here:
+        # super().__init__()
+        # #now that we have access to the attributes in the parent class, replace
+        # #the number of strings for the ElectricGuitar child class to 8:
+        # self.n_strings = 8
 
+        #change the above to accomodate the n_strings parameter added to the class Guitar
+        # so remove the  self.n_strings = 8 and and pass the number of strings 
+        # (n_strings = 8) in the super().__init__()
+        super().__init__(n_strings=8)
+
+        #add new attributes in the child class:
+        #add colors: black = #000000 and white = #FFFFFF (hexidecimal colors)
+        self.color = ("#000000", "FFFFFF")   
+
+        #store some confidential information inside the child class:
+        #how much does the guitar cost to the store owner?
+        #create a "private member" by putting two underscores before the info you want hidden (not really hidden):
+        #self.__cost = 50
+           
 #assign my_guitar to ElectricGuitar:
 my_guitar= ElectricGuitar()
 #can we access the n_strings here?:
@@ -232,8 +277,53 @@ my_guitar= ElectricGuitar()
 #output: 6
 
 my_guitar.playLouder()
+#output: DUM DUM DUM DUM DUM DUM
+
+print("child class:", my_guitar.n_strings)
+#output: child class: 8
+print("parent class:", Guitar().n_strings)
+#output: parent class: 6
+
+#can you access the "secret info" in __cost?
+# print(my_guitar.__cost)
+#this will produce an error because you can't access it:
+#output: Traceback (most recent call last):
+#   File "/workspaces/notes_object_oriented_programming_capstone/1_oop.py", line 262, in <module>
+#     print(my_guitar.__cost)
+#           ^^^^^^^^^^^^^^^^
+# AttributeError: 'ElectricGuitar' object has no attribute '__cost'
+
+#the attribute __cost can be accessed this way:
+#print(my_guitar._ElectricGuitar__cost)
+#output: 50
+
+#try to print again after adding the class to the parent and removing from child:
+#seems hidden, but it's not:
+# print(my_guitar._ElectricGuitar__cost)
+#output: Traceback (most recent call last):
+#   File "/workspaces/notes_object_oriented_programming_capstone/1_oop.py", line 287, in <module>
+#     print(my_guitar._ElectricGuitar__cost)
+#           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# AttributeError: 'ElectricGuitar' object has no attribute '_ElectricGuitar__cost'
+
+#try to access the cost again, but remove the Electric from (child class ElectricGuitar)
+print(my_guitar._Guitar__cost)
+#prints!!!
+#output: 50
+
+#You really can't hide things in python, even in private, they are accessible.
+#added a __secret method to the parent class, and it is accessbile:
+#print the secret thing:
+my_guitar._ElectricGuitar__secret()
 
 
+#from BaseGuitar take in the number of strings "4" in the parentheses:
+# print(BaseGuitar(4).n_strings)
+# output: 4
 
+#Verify changing the super().__init__(n_strings=8) in the Electric Guitar class worked:
+print("my base guitar has", BaseGuitar(4).n_strings, "strings")
+#output: my base guitar has 4 strings
 
-
+print("my electric guitar has", my_guitar.n_strings, "strings" )
+#output: my electric guitar has 8 strings
